@@ -1,7 +1,7 @@
 using MCParticles
 using Test
 
-@testset "MCParticles.jl" begin
+@testset "MCParticles.jl constructor: DynamicParticle" begin
     # Constructor tests
     f(x,t) = -sum(x) + t
     dyn_p1_1 = DynamicParticle([1.0,1.0], 1.0, f, 1.0, f([1.0,1.0],1.0))
