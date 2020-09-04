@@ -1,5 +1,7 @@
 module MCParticles
+using Distributions
 
-# Write your package code here.
+include("particle-constructor.jl")
+#include("particle-array-accessor.jl")
 
 end
