@@ -5,4 +5,6 @@
 [![Build Status](https://travis-ci.com/bonStats/MCParticles.jl.svg?branch=master)](https://travis-ci.com/bonStats/MCParticles.jl)
 [![Coverage](https://codecov.io/gh/bonStats/MCParticles.jl/branch/master/graph/badge.svg)](https://codecov.io/gh/bonStats/MCParticles.jl)
 
-Light-weight framework for particle structures in Julia. For use in Monte Carlo sampling schemes. Under construction.
+Light-weight framework for particle structures in Julia. For use in Monte Carlo sampling schemes. 
+
+Under construction. Stable branch coming soon.
