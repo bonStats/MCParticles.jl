@@ -22,3 +22,12 @@ using Test
         dyn_p2_1.cacheℓdens == dyn_p2_2.cacheℓdens,
         dyn_p2_1.τ == dyn_p2_2.τ])
 end
+
+@testset "MCParticles.jl constructor: StaticParticle" begin
+    # Constructor tests
+    stat_p1_1 = StaticParticle([1.0,1.0], 1.0)
+    stat_p1_2 = Particle([1.0,1.0], 1.0)
+    @test all([
+        stat_p1_1.x == stat_p1_2.x,
+        stat_p1_1.ℓw == stat_p1_2.ℓw])
+end
