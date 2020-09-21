@@ -1,6 +1,6 @@
 name = "MCParticles"
 uuid = "24600035-b1cd-4d3f-b79a-9b7e18b664a2"
-authors = ["Joshua Bon <joshuajbon@gmail.com> and contributors"]
+authors = ["Joshua Bon <joshuajbon@gmail.com>"]
 version = "0.1.0"
 
 [deps]

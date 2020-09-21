@@ -42,7 +42,7 @@ end
 """
     Particle(x::T, ℓw::Real, ℓdens::Function, τ::Real) where {T<:Any}
 
-Explicit constructor for Particle with type 'DynamicParticle'.
+Explicit constructor for Particle with type ```DynamicParticle```.
 Auto calculates cached log density ```cacheℓdens```
 
 - ```x``` Location of particle
@@ -64,7 +64,7 @@ end
 """
     Particle(initial::D, ℓdens::Function, ℓw::Real = 0.0, τ::Real = 0.0) where {D<:Distribution}
 
-Constructor Particle with type 'DynamicParticle' from initial distribution ```init_distribution```.
+Constructor Particle with type ```DynamicParticle``` from initial distribution ```init_distribution```.
 Draws sample from ```init_distribution``` and
 Auto calculates cached log density ```cacheℓdens```
 
@@ -83,7 +83,7 @@ end
 """
     Particle(x::T, ℓw::Real) where {T<:Any}
 
-Explicit constructor for Particle with type 'StaticParticle'.
+Explicit constructor for Particle with type ```StaticParticle```.
 
 - ```x``` Location of particle
 - ```ℓw``` Log weight of particle (possibly unnormalised)
