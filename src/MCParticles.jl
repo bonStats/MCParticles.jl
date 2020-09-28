@@ -1,6 +1,8 @@
 module MCParticles
 using Distributions
 
+using StatsFuns: logsumexp
+
 export Particle, StaticParticle, DynamicParticle
 #export weights, location, logdensity
 #export reweight
