@@ -1,6 +1,6 @@
-function weights(p::Array{Particle{T}}; logscale = true, normalise = true) where {T<:Any}
+function weights(p::Array{<:Particle{T}}; logscale = true, normalscale = true) where {T<:Any}
     logw = vec(getfield.(p, :ℓw))
-    if normalise
+    if normalscale
         logw = normalise(logw)
     end
     if logscale

@@ -46,11 +46,11 @@ Explicit constructor for Particle with type ```DynamicParticle```.
 Auto calculates cached log density ```cacheℓdens```
 
 - ```x``` Location of particle
-- ```ℓw``` Log weight of particle (possibly unnormalised)
+- ```w``` Weight of particle (possibly unnormalised)
 - ```ℓdens``` Log density function
 - ```τ``` Temperature (or index) for ℓdens
 """
-function Particle(x::T, ℓw::Real, ℓdens::Function, τ::Real) where {T<:Any}
+function Particle(x::T, w::Real, ℓdens::Function, τ::Real) where {T<:Any}
     if hasmethod(ℓdens, (T, Real))
         cacheℓdens = ℓdens(x, τ)
     elseif hasmethod(ℓdens, Tuple{T})
@@ -58,7 +58,7 @@ function Particle(x::T, ℓw::Real, ℓdens::Function, τ::Real) where {T<:Any}
     else
         cacheℓdens = nothing
     end
-    DynamicParticle(x, ℓw, ℓdens, τ, real(cacheℓdens))
+    DynamicParticle(x, log(w), ℓdens, τ, real(cacheℓdens))
 end
 
 """
@@ -70,13 +70,13 @@ Auto calculates cached log density ```cacheℓdens```
 
 - ```initial``` Initial distribution
 - ```ℓdens``` Log density function
-- ```ℓw``` Log weight of particle (possibly unnormalised)
+- ```w``` Weight of particle (possibly unnormalised)
 - ```τ``` Temperature (or index) for ℓdens
 """
 #Particle generated from intial distribution
-function Particle(initial::D, ℓdens::Function, ℓw::Real = 0.0, τ::Real = 0.0) where {D<:Distribution}
+function Particle(initial::D, ℓdens::Function, w::Real = 1.0, τ::Real = 0.0) where {D<:Distribution}
     x = rand(initial, 1)
-    Particle(x, ℓw, ℓdens, τ)
+    Particle(x, log(w), ℓdens, τ)
 end
 
 # Constructors - 'SimpleParticle'
@@ -86,8 +86,8 @@ end
 Explicit constructor for Particle with type ```StaticParticle```.
 
 - ```x``` Location of particle
-- ```ℓw``` Log weight of particle (possibly unnormalised)
+- ```w``` Weight of particle (possibly unnormalised)
 """
-function Particle(x::T, ℓw::Real) where {T<:Any}
-    StaticParticle(x, ℓw)
+function Particle(x::T, w::Real) where {T<:Any}
+    StaticParticle(x, log(w))
 end
