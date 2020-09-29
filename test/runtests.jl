@@ -62,3 +62,17 @@ end
     stat_p1 = mutate(stat_p1, [1.0,2.0])
     @test pequal(stat_p1, stat_p2)
 end
+
+@testset "MCParticles.jl reweight functions" begin
+    #DynamicParticle
+    # f(x,t) = -sum(x) + t
+    # dyn_p1 = Particle([1.0,1.0], 1.0, f, 1.0)
+    # dyn_p2 = Particle([1.0,2.0], 1.0, f, 2.0)
+    # dyn_p1 = mutate(dyn_p1, [1.0,2.0], 2.0)
+    # @test pequal(dyn_p1, dyn_p2)
+    #StaticParticle
+    stat_p1 = Particle([1.0,1.0], 1.0)
+    stat_p2 = Particle([1.0,1.0], 2.0)
+    stat_p1 = reweight(stat_p1, 2.0)
+    @test pequal(stat_p1, stat_p2)
+end

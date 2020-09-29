@@ -6,14 +6,14 @@ using StatsFuns: logsumexp
 export Particle, StaticParticle, DynamicParticle
 export weights, location, logdensity
 export pequal
-#export reweight
+export reweight
 export mutate
 
 include("helper-functions.jl")
 include("particle-constructor.jl")
 include("particle-equal.jl")
 include("particle-array-accessor.jl")
-#include("particle-reweight.jl")
+include("particle-reweight.jl")
 include("particle-mutate.jl")
 
 

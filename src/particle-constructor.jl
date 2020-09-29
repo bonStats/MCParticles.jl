@@ -49,7 +49,7 @@ Auto calculates cached log density ```cacheℓdens```
 - ```w``` Weight of particle (possibly unnormalised)
 - ```ℓdens``` Log density function
 - ```τ``` Temperature (or index) for ℓdens
--- ```logweight``` Boolean. Is ```w``` on log scale? Default is ```false```
+-- ```logweight``` Is ```w``` on log scale? Default is ```false```
 
 """
 function Particle(x::T, w::Real, ℓdens::Function, τ::Real, logweight::Bool = false) where {T<:Any}
@@ -79,7 +79,7 @@ Auto calculates cached log density ```cacheℓdens```
 - ```ℓdens``` Log density function
 - ```w``` Weight of particle (possibly unnormalised)
 - ```τ``` Temperature (or index) for ℓdens
-- ```logweight``` Boolean. Is ```w``` on log scale? Default is ```false```
+- ```logweight``` Is ```w``` on log scale? Default is ```false```
 
 """
 #Particle generated from intial distribution
@@ -96,7 +96,7 @@ Explicit constructor for Particle with type ```StaticParticle```.
 
 - ```x``` Location of particle
 - ```w``` Weight of particle (possibly unnormalised)
-- ```logweight``` Boolean. Is ```w``` on log scale? Default is ```false```
+- ```logweight``` Is ```w``` on log scale? Default is ```false```
 """
 function Particle(x::T, w::Real, logweight::Bool = false) where {T<:Any}
     if logweight
@@ -114,7 +114,7 @@ Draws sample from ```init_distribution```
 
 - ```initial``` Initial distribution
 - ```w``` Weight of particle (possibly unnormalised)
-- ```logweight``` Boolean. Is ```w``` on log scale? Default is ```false```
+- ```logweight``` Is ```w``` on log scale? Default is ```false```
 
 """
 #Particle generated from intial distribution
