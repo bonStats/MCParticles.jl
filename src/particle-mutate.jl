@@ -4,8 +4,9 @@ function mutate(p::StaticParticle{T}, x::T) where {T<:Any}
 
 end
 
-function mutate(p::DynamicParticle{T}, x::T; τ::Real = p.τ) where {T<:Any}
+function mutate(p::DynamicParticle{T}, x::T, τ::Real = p.τ) where {T<:Any}
     # recalculates cached density
-    Particle(x, p.ℓw, p.ℓdens, τ)
+    # logweight = true
+    Particle(x, p.ℓw, p.ℓdens, τ, true)
 
 end
