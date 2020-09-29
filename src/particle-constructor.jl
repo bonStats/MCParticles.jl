@@ -40,7 +40,7 @@ end
 # Constructors - 'DynamicParticle'
 
 """
-    Particle(x::T, ℓw::Real, ℓdens::Function, τ::Real) where {T<:Any}
+    Particle(x::T, w::Real, ℓdens::Function, τ::Real, logweight::Bool = false) where {T<:Any}
 
 Explicit constructor for Particle with type ```DynamicParticle```.
 Auto calculates cached log density ```cacheℓdens```
@@ -49,8 +49,10 @@ Auto calculates cached log density ```cacheℓdens```
 - ```w``` Weight of particle (possibly unnormalised)
 - ```ℓdens``` Log density function
 - ```τ``` Temperature (or index) for ℓdens
+-- ```logweight``` Boolean. Is ```w``` on log scale? Default is ```false```
+
 """
-function Particle(x::T, w::Real, ℓdens::Function, τ::Real) where {T<:Any}
+function Particle(x::T, w::Real, ℓdens::Function, τ::Real, logweight::Bool = false) where {T<:Any}
     if hasmethod(ℓdens, (T, Real))
         cacheℓdens = ℓdens(x, τ)
     elseif hasmethod(ℓdens, Tuple{T})
@@ -58,11 +60,16 @@ function Particle(x::T, w::Real, ℓdens::Function, τ::Real) where {T<:Any}
     else
         cacheℓdens = nothing
     end
-    DynamicParticle(x, log(w), ℓdens, τ, real(cacheℓdens))
+    if logweight
+        DynamicParticle(x, w, ℓdens, τ, real(cacheℓdens))
+    else
+        DynamicParticle(x, log(w), ℓdens, τ, real(cacheℓdens))
+    end
+
 end
 
 """
-    Particle(initial::D, ℓdens::Function, ℓw::Real = 0.0, τ::Real = 0.0) where {D<:Distribution}
+    Particle(initial::D, ℓdens::Function, w::Real = 0.0, τ::Real = 0.0, logweight::Bool = false) where {D<:Distribution}
 
 Constructor Particle with type ```DynamicParticle``` from initial distribution ```init_distribution```.
 Draws sample from ```init_distribution``` and
@@ -72,22 +79,46 @@ Auto calculates cached log density ```cacheℓdens```
 - ```ℓdens``` Log density function
 - ```w``` Weight of particle (possibly unnormalised)
 - ```τ``` Temperature (or index) for ℓdens
+- ```logweight``` Boolean. Is ```w``` on log scale? Default is ```false```
+
 """
 #Particle generated from intial distribution
-function Particle(initial::D, ℓdens::Function, w::Real = 1.0, τ::Real = 0.0) where {D<:Distribution}
+function Particle(initial::D, ℓdens::Function, w::Real = 1.0, τ::Real = 0.0, logweight::Bool = false) where {D<:Distribution}
     x = rand(initial, 1)
-    Particle(x, log(w), ℓdens, τ)
+    Particle(x, w, ℓdens, τ, logweight)
 end
 
 # Constructors - 'SimpleParticle'
 """
-    Particle(x::T, ℓw::Real) where {T<:Any}
+    Particle(x::T, w::Real, logweight::Bool = false) where {T<:Any}
 
 Explicit constructor for Particle with type ```StaticParticle```.
 
 - ```x``` Location of particle
 - ```w``` Weight of particle (possibly unnormalised)
+- ```logweight``` Boolean. Is ```w``` on log scale? Default is ```false```
 """
-function Particle(x::T, w::Real) where {T<:Any}
-    StaticParticle(x, log(w))
+function Particle(x::T, w::Real, logweight::Bool = false) where {T<:Any}
+    if logweight
+        StaticParticle(x, w)
+    else
+        StaticParticle(x, log(w))
+    end
+end
+
+"""
+    Particle(initial::D, w::Real = 1.0, logweight::Bool = false) where {D<:Distribution}
+
+Constructor Particle with type ```StaticParticle``` from initial distribution ```init_distribution```.
+Draws sample from ```init_distribution```
+
+- ```initial``` Initial distribution
+- ```w``` Weight of particle (possibly unnormalised)
+- ```logweight``` Boolean. Is ```w``` on log scale? Default is ```false```
+
+"""
+#Particle generated from intial distribution
+function Particle(initial::D, w::Real = 1.0, logweight::Bool = false) where {D<:Distribution}
+    x = rand(initial, 1)
+    Particle(x, w, logweight)
 end
