@@ -1,7 +1,7 @@
 name = "MCParticles"
 uuid = "24600035-b1cd-4d3f-b79a-9b7e18b664a2"
 authors = ["Joshua Bon <joshuajbon@gmail.com>"]
-version = "0.1.0"
+version = "0.1.1"
 
 [deps]
 Distributions = "31c24e10-a181-5473-b8eb-7969acd0382f"
