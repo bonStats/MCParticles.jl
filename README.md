@@ -7,4 +7,4 @@
 
 Light-weight framework for particle structures in Julia. For use in Monte Carlo sampling schemes. 
 
-Under construction. Stable branch coming soon.
+Under construction. 
